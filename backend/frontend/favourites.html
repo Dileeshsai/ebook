@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites - Book Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+            .unlike-button {
+        width: 100%; /* Full width for these buttons */
+        padding: 15px; /* Increase padding for larger tap area */
+        font-size: 18px; /* Larger font size */
+        margin: 10px 0; /* Space between buttons */
+        border-radius: 8px; /* Slightly larger border radius */
+    }
+    .unlike-button:hover {
+        background-color: #004a8d; /* Darker shade for hover effect */
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Book Haven</div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="favourites.html"><span id="like-count">Likes: 0</span></a></li>
+            </ul>
+        </nav>
+        <div class="profile" style="display: none;">
+            <button class="profile-button">
+                <span id="usernameDisplay">Profile</span> <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="container" style="justify-content: center;">
+        <h2>Your Favorite Books</h2>
+        <div id="favorites-grid" class="books-grid"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Online Book Store</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const favorites = await fetchLikedBooks(token); // Get the liked book IDs
+                const bookDetails = await fetchBookDetails(favorites); // Fetch details of the liked books
+                displayFavorites(bookDetails); // Display the favorites
+                updateNavbarLikeCount();
+
+            } else {
+                alert('You need to log in to view your favorites.');
+            }
+        });
+
+        // Function to fetch the liked books from the server
+        async function fetchLikedBooks(token) {
+            try {
+                const response = await fetch('/api/user/likes', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.likedBooks || [];
+                } else {
+                    console.error('Error fetching liked books:', response.statusText);
+                    return [];
+                }
+            } catch (error) {
+                console.error('Error fetching liked books:', error);
+                return [];
+            }
+        }
+
+        // Function to fetch book details from the API using book IDs
+        async function fetchBookDetails(bookIds) {
+            const apiUrl = "https://gutendex.com/books/";
+            const bookDetails = [];
+
+            for (let bookId of bookIds) {
+                try {
+                    const response = await fetch(`${apiUrl}${bookId}/`);
+                    if (response.ok) {
+                        const bookData = await response.json();
+                        bookDetails.push({
+                            id: bookData.id,
+                            title: bookData.title,
+                            author: bookData.authors[0]?.name || "Unknown Author",
+                            genre: bookData.subjects ? bookData.subjects.join(", ") : "General",
+                            cover_image: bookData.formats["image/jpeg"] || 'placeholder.jpg',
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error fetching book details for ID ' + bookId, error);
+                }
+            }
+
+            return bookDetails;
+        }
+
+        // Function to display favorite books in the grid
+        function displayFavorites(books) {
+            const favoritesGrid = document.getElementById('favorites-grid');
+            favoritesGrid.innerHTML = ""; // Clear previous content
+
+            if (books.length === 0) {
+                favoritesGrid.innerHTML = '<p>No favorites found.</p>';
+                return;
+            }
+
+            books.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.classList.add('book-card');
+                bookCard.innerHTML = `
+                    <div class="book-section">
+                        <img src="${book.cover_image}" alt="${book.title}" class="book-cover">
+                    </div>
+                    <div class="book-section">
+                        <h3 class="book-title">${book.title}</h3>
+                    </div>
+                    <div class="book-section">
+                        <p class="book-author">Author: ${book.author}</p>
+                    </div>
+                    <div class="book-section">
+                        <p class="book-genre">Genre: ${book.genre}</p>
+                    </div>
+                    <div class="book-section">
+                        <button class="unlike-button" data-book-id="${book.id}">Unlike</button>
+                    </div>
+                `;
+
+                // Add event listener to the "Unlike" button
+                const unlikeButton = bookCard.querySelector('.unlike-button');
+                unlikeButton.addEventListener('click', async () => {
+                    await removeFromFavorites(book.id);
+                    bookCard.remove(); // Remove the book from the DOM after unliking
+                    updateLikesCount();
+                });
+
+                favoritesGrid.appendChild(bookCard);
+            });
+        }
+
+        // Function to remove the book from the user's favorites
+// Function to remove the book from the user's favorites
+async function removeFromFavorites(bookId) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        console.error("No token found. User is not logged in.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/user/likes/${bookId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Book removed from favorites:', data.likedBooks);
+            // Update UI with new likedBooks list
+            updateLikesCount();  // Update the likes count in the navbar
+            window.location.reload();
+        } else {
+            console.error('Error removing book from favorites:', response.statusText);
+            alert('Error removing book from favorites');
+        }
+    } catch (error) {
+        console.error('Error removing book from favorites:', error);
+    }
+}
+
+        // Function to update the likes count
+// Function to update the likes count in the navbar
+
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

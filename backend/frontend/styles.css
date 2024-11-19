@@ -1,0 +1,594 @@
+
+body {
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-style: normal;
+    margin: 0px;
+      }
+header {
+    margin-top: 0%;
+    padding: 10px 0;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #666;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border: 1px solid #007BFF;
+    outline: none;
+}
+
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#toggleLink {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#toggleLink a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+#toggleLink a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    margin-left: 20px;
+    font-size: 28px; /* Larger font size */
+    font-weight: bold;
+    color: #007bff; /* Blue color for logo */
+}
+.navbar {
+    flex-grow: 1;
+    text-align: center;
+}
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    display: inline-flex;
+    gap: 40px; /* Increased gap */
+}
+.navbar a {
+    font-size: larger;
+    color: black; /* Black text for links */
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+}
+.navbar a:hover {
+    background-color: #add8e6; /* Light blue hover effect */
+    color: white; /* Change text color on hover */
+}
+.navbar a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #007bff; /* Blue underline */
+    left: 50%;
+    bottom: -5px;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+.navbar a:hover::after {
+    width: 100%;
+    left: 0;
+}
+.profile {
+    position: relative;
+    margin-right: 20px;
+}
+.profile-button {
+    background-color: #007bff; /* Blue button */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.profile-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+.profile-dropdown {
+    position: absolute;
+    background-color: white; /* White background for dropdown */
+    color: black;
+    display: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+.profile-dropdown a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid #eee;
+}
+.profile-dropdown a:last-child {
+    border-bottom: none;
+}
+.profile-dropdown a:hover {
+    background-color: #add8e6; /* Light blue on hover */
+    color: white; /* Change text color on hover */
+}
+.profile-dropdown.active {
+    display: block !important;
+}
+.sidebar {
+    width: 220px;
+    background-color: #ffffff; /* White background for sidebar */
+    position: fixed;
+    top: 105px;
+    bottom: 0;
+    overflow-y: auto;
+}
+.sidebar h3 {
+    color: #3ec1db; /* Blue headings */
+    border-bottom: 2px solid #007bff; /* Underline for categories */
+    padding-bottom: 10px;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar ul li {
+    margin: 10px 0;
+}
+.sidebar ul li a {
+    display: block; /* Make the link take the full width */
+    text-decoration: none;
+    color: #007bff; /* Blue links */
+    background-color: #e7f3ff; /* Light blue background */
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.sidebar ul li a:hover {
+    background-color: #add8e6; /* Light blue hover effect */
+    color: white; /* Change text color on hover */
+}
+.content {
+    margin-left: 240px;
+    padding: 20px;
+    flex-grow: 1;
+    background-color: #ffffff; /* White background for content */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    .sidebar {
+        position: relative;
+        width: 100%;
+        top: auto;
+        height: auto;
+    }
+    .content {
+        margin-left: 0;
+    }
+}
+
+.hero {
+    background: url('images/bg.jpg') no-repeat center center;
+    background-size: cover; /* Ensure the background covers the whole section */
+    color: white;
+    text-align: center;
+    padding: 100px 20px; /* Adjust padding as needed */
+    height: 100vh; /* Full height of the viewport */
+}
+
+
+
+.hero p {
+    font-size: 24px;
+}
+.col-md-9{
+    background-color: rgba(0, 0, 0, 0);
+}
+.btn {
+    background: #4fc9dc;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: #339adf;
+}
+
+main {
+    padding: 20px;
+}
+
+.book-list {
+    text-align: center; /* Center the text */
+    margin: 40px 0; /* Space above and below */
+}
+
+.books-grid {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive columns */
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Space between items */
+    padding: 0 20px; /* Padding for sides */
+}
+.book-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Space between sections */
+    height: 400px;
+    box-sizing: border-box;
+    overflow: hidden; /* Fixed height for uniformity */
+}
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.book-section {
+    width: 100%; /* Full width for each section */
+    text-align: center; /* Center align text */
+}
+
+.book-cover {
+    width: 150px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Space below the image */
+}
+
+.book-title {
+    font-size: 1.1em; /* Standard font size */
+    margin: 0;
+    height: 40px; /* Fixed height for title */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.book-author,
+.book-genre {
+    margin: 5px 0;
+    font-size: 0.9em; 
+    height: 20px; /* Fixed height for uniformity */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Full width for buttons */
+    margin-top: auto; /* Push buttons to the bottom */
+}
+
+
+
+.subscribe-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 1; /* Allow buttons to grow */
+    margin: 0 5px; /* Space between buttons */
+    background-color: #359de3;
+    color: white;
+}
+
+.subscribe-button:hover {
+    
+    background-color: #02ac21;
+}
+
+.view-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 1; /* Allow buttons to grow */
+    margin: 0 5px; /* Space between buttons */
+    background-color:#02ac21;
+    color: white;
+}
+
+.view-button:hover {
+    background-color: #0056b3;
+}
+
+.like-button {
+    background-color: #e7f3ff; /* Light blue background */
+  border: none;
+  color: rgb(7, 6, 6);
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 12px;
+    margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+}
+
+.like-button:hover {
+    background-color: #ef80f0;
+}
+
+.book-card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+footer {
+    text-align: center;
+    padding: 50px;
+    background: #333;
+    color: white;
+}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+
+    .hero h2 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+    }
+
+    .book {
+        width: 150px; /* Smaller width for mobile */
+    }
+}
+
+
+.search-container {
+    display: flex;
+    justify-content: center; /* Center the search bar */
+    margin: 20px 0; /* Add some vertical space */
+}
+
+.search-input {
+    width: 300px; /* Set a fixed width for the input */
+    padding: 10px; /* Add padding for better usability */
+    border: 2px solid #3f8fd8; /* Border color */
+    border-radius: 25px; /* Rounded corners */
+    outline: none; /* Remove default outline */
+    font-size: 16px; /* Increase font size */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+.search-input:focus {
+    border-color: #0056b3; /* Change border color on focus */
+}
+
+.search-button {
+    padding: 10px 20px; /* Add padding */
+    margin-bottom:15px;
+    margin-left: 10px; /* Space between input and button */
+    border: none; /* Remove default border */
+    border-radius: 25px; /* Rounded corners */
+    background-color: #359de3; /* Button color */
+    color: white; /* Text color */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for background */
+}
+
+.search-button:hover {
+    background-color: #18647b; /* Darker green on hover */
+}
+
+.category-card {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    background-color: #ccc;
+}
+
+.content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+.categories {
+    text-align: center; /* Center align the text */
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between items */
+    padding: 0 20px; /* Padding for sides */
+}
+
+.category-card {
+    background-color: #f8f9fa; /* Light background color */
+    border: 2px solid #32a8de; /* Border color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Inner padding */
+    cursor: pointer; /* Change cursor on hover */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth effects */
+    text-align: center; /* Center text */
+}
+
+.category-card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+@media (max-width: 480px) {
+
+    .hero {
+        padding: 60px 10px; /* Less padding for smaller screens */
+    }
+
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .book {
+        width: 100%; /* Full width for mobile */
+        margin: 5px 0; /* Less margin */
+    }   .search-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+   
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on mobile */
+    }
+
+    .search-input {
+        width: calc(100% - 70px); /* Adjust width for mobile */
+    }
+}
+@media (max-width: 768px) {
+    body {
+        font-size: 16px; /* Larger base font size */
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px; /* Adjust padding */
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        padding: 0;
+        gap: 15px; /* Reduce spacing */
+    }
+
+    .sidebar {
+        display: none; /* Hide sidebar on mobile */
+    }
+
+    .content {
+        margin-left: 0; /* Remove left margin */
+        padding: 20px; /* Maintain padding */
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(1, 1fr); /* Two columns on mobile */
+        gap: 15px; /* Reduce gap between items */
+    }
+
+    .search-container {
+        flex-direction: column;
+        align-items: center; /* Center elements */
+        margin-bottom: 20px;
+    }
+
+    .search-input {
+        width: 100%; /* Full width */
+        margin-bottom: 10px; /* Space below input */
+    }
+
+    .search-button {
+        width: 100%; /* Full width for button */
+        padding: 12px; /* Larger padding */
+    }
+
+    .book-card {
+        height: auto; /* Allow variable heights */
+        padding: 10px; /* Adjust padding */
+    }
+
+    .book-title, .book-author, .book-genre {
+        font-size: 0.9em; /* Adjust font size */
+    }
+
+    .modal-content {
+        width: 90%; /* Max width for modal */
+        max-width: 400px; /* Limit max width */
+    }
+}
+@media (max-width: 768px) {
+    .search-button {
+        width: 100%; /* Full width for the search button */
+        padding: 15px; /* Increase padding for larger tap area */
+        font-size: 18px; /* Larger font size for readability */
+        margin-top: 10px; /* Space above the button */
+    }
+
+    .subscribe-button,
+    .view-button,
+    .like-button {
+        width: 100%; /* Full width for these buttons */
+        padding: 15px; /* Increase padding for larger tap area */
+        font-size: 18px; /* Larger font size */
+        margin: 10px 0; /* Space between buttons */
+        border-radius: 8px; /* Slightly larger border radius */
+    }
+
+    .subscribe-button:hover,
+    .view-button:hover,
+    .like-button:hover {
+        background-color: #004a8d; /* Darker shade for hover effect */
+    }
+}

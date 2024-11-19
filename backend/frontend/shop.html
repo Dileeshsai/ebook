@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="logo">Book Haven</div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="favourites.html"><span id="like-count">Likes: 0</span></a></li>
+            </ul>
+        </nav>
+    
+        <!-- Hamburger Menu Icon -->
+
+    
+        <!-- Profile Section -->
+        <div class="profile">
+            <button class="profile-button">
+                <span id="usernameDisplay">Profile</span> <i class="fas fa-user"></i>
+            </button>
+    
+            <div id="profileDropdown" class="profile-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background-color: white; border: 1px solid #ddd; box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); padding: 8px; min-width: 150px; z-index: 1;">
+                <p>Welcome to your profile!</p>
+            </div>
+        </div>
+    </header>
+    
+
+    <div class="sidebar">
+        <h3>Categories</h3>
+        <ul>
+            <li><a href="#" onclick="resetFilters()">All Books</a></li>
+            <li><a href="#" onclick="filterByCategory('Fiction')">Fiction</a></li>
+            <li><a href="#" onclick="filterByCategory('Science Fiction')">Science Fiction</a></li>
+            <li><a href="#" onclick="filterByCategory('Horror')">Horror</a></li>
+            <li><a href="#" onclick="filterByCategory('Romance')">Romance</a></li>
+            <li><a href="#" onclick="filterByCategory('Mystery')">Mystery</a></li>
+            <li><a href="#" onclick="filterByCategory('Fantasy')">Fantasy</a></li>
+        </ul>
+    </div>
+
+    <div class="content" id="content">
+        <section class="search-container">
+            <input type="text" id="search" placeholder="Search for books..." class="search-input" oninput="filterBooks()">
+            <button class="search-button" onclick="filterBooks()">Search</button>
+        </section>
+
+        <div id="book-list" class="book-list">
+            <h2>Available Books</h2>
+            <div class="books-grid" id="books-grid">
+                <!-- Dynamic book cards will be inserted here -->
+            </div>
+        </div>
+        <footer>
+            <p>&copy; 2024 Online Book Store</p>
+        </footer>
+    </div>
+<script src="script.js"></script>
+</body>
+
+</html>
